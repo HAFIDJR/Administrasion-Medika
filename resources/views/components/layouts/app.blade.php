@@ -169,7 +169,7 @@
 
             <!-- Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="/home">
+                <a class="nav-link" href="/home" wire:navigate>
                     <i class="fas fa-chart-line"></i>
                     <span>Dashboard</span>
                 </a>
@@ -391,7 +391,8 @@
 
                 <!-- Page Content -->
                 <main class="py-4">
-                    @yield('content')
+                    {{ $slot }}
+                    {{-- @yield('content') --}}
                 </main>
             </div>
 
