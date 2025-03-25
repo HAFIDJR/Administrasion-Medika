@@ -1,5 +1,4 @@
 <div>
-    
     <form wire:submit.prevent='save'>
         <div class="row gy-3 gy-md-4 overflow-hidden">
             <div class="col-12">

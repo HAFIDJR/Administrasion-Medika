@@ -13,7 +13,7 @@
                                 <i class="fas fa-hospital-users fa-2x text-white me-3"></i>
                                 <h4 class="mb-0 text-white fw-bold">DAFTAR PENGAJUAN PASIEN</h4>
                             </div>
-                            <a href="" class="btn btn-light btn-lg">
+                            <a href="{{ route('rawat.create') }}" class="btn btn-light btn-lg" wire:navigate>
                                 <i class="fas fa-plus-circle me-2"></i>Tambah Data Rawat
                             </a>
                         </div>
@@ -109,9 +109,8 @@
                                             <td>
                                                 <div class="d-flex justify-content-center gap-2">
                                                     <!-- Detail Button -->
-                                                    <a href="{{ route('rawat.show', $item->id) }}"
-                                                        class="btn btn-info btn-sm" data-bs-toggle="tooltip"
-                                                        title="Lihat Detail">
+                                                    <a href="" class="btn btn-info btn-sm"
+                                                        data-bs-toggle="tooltip" title="Lihat Detail">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
 
@@ -125,8 +124,7 @@
                                                     @endif
 
                                                     <!-- Delete Button -->
-                                                    <form action="{{ route('rawat.destroy', $item->id) }}"
-                                                        method="POST" class="d-inline">
+                                                    <form action="" method="POST" class="d-inline">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger btn-sm"

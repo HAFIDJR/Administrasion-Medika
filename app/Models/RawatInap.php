@@ -21,6 +21,7 @@ class RawatInap extends Model
         'tanggal_masuk',
         'tanggal_keluar',
         'status',
+        'user_id'
     ];
 
     public function user()

@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\RawatInapController;
+use App\Livewire\RawatInap\CreateRawatInap;
 use App\Livewire\RawatInap\RawatInap;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -41,7 +42,8 @@ Route::post('/email/verification-notification', [EmailController::class, 'resend
 // Rawat Inap Controller 
 Route::middleware(['auth'])->group(function () {
     // Route::resource('rawat', RawatInapController::class);
-    Route::get('/rawat', RawatInap::class);
+    Route::get('/rawat', RawatInap::class)->name('rawat.index');
+    Route::get('/rawat/create', CreateRawatInap::class)->name('rawat.create');
 });
 Route::get('/', function () {
     return view('welcome');
