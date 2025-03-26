@@ -109,8 +109,11 @@
                                             <td>
                                                 <div class="d-flex justify-content-center gap-2">
                                                     <!-- Detail Button -->
-                                                    <a href="" class="btn btn-info btn-sm"
-                                                        data-bs-toggle="tooltip" title="Lihat Detail">
+                                                    <a href="{{ route('rawat.show', ['rawatInap' => $item->id]) }}"
+                                                        class="btn btn-info btn-sm" data-bs-toggle="tooltip"
+                                                        title="Lihat Detail" wire:key='{{ $item->id }}'
+                                                        wire:navigate>
+
                                                         <i class="fas fa-eye"></i>
                                                     </a>
 
@@ -124,10 +127,10 @@
                                                     @endif
 
                                                     <!-- Delete Button -->
-                                                    <form action="" method="POST" class="d-inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm"
+                                                    <form wire:click.prevent='deleteRawat({{ $item->id }})'
+                                                        class="d-inline">
+                                                        <button type="submit"
+                                                            class="wire:key='{{ $item->id }}' btn btn-danger btn-sm"
                                                             data-bs-toggle="tooltip" title="Hapus Data"
                                                             onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                                             <i class="fas fa-trash"></i>
@@ -182,23 +185,5 @@
     </style>
 
     <!-- Initialize DataTable and Tooltips -->
-    <script>
-        $(document).ready(function() {
-            $('#dataTable').DataTable({
-                responsive: true,
-                language: {
-                    search: "_INPUT_",
-                    searchPlaceholder: "Cari Data..."
-                },
-                "pageLength": 10,
-                "ordering": true,
-            });
 
-            // Initialize tooltips
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            });
-        });
-    </script>
 </div>

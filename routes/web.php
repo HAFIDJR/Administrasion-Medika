@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\RawatInapController;
 use App\Livewire\RawatInap\CreateRawatInap;
 use App\Livewire\RawatInap\RawatInap;
+use App\Livewire\RawatInap\ShowRawatInap;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,7 @@ Route::middleware(['auth'])->group(function () {
     // Route::resource('rawat', RawatInapController::class);
     Route::get('/rawat', RawatInap::class)->name('rawat.index');
     Route::get('/rawat/create', CreateRawatInap::class)->name('rawat.create');
+    Route::get('/rawat/show/{rawatInap}', ShowRawatInap::class)->name('rawat.show');
 });
 Route::get('/', function () {
     return view('welcome');
