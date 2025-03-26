@@ -8,7 +8,21 @@ use Livewire\Component;
 
 class RawatInap extends Component
 {
+
     public $rawatInap;
+
+    public function deleteRawat($id)
+    {
+        $rawatInap = ModelsRawatInap::findOrFail($id);
+        $this->authorize("delete", $rawatInap);
+        $rawatInap->delete();
+
+        session()->flash('success', 'Data berhasil dihapus.');
+
+        // Perbarui koleksi 
+
+        $this->redirectRoute('rawat.index');
+    }
 
     public function mount()
     {

@@ -34,6 +34,9 @@ class RawatInapForm extends Form
     #[Validate(rule: 'nullable|date')]
     public $tanggalKeluar = null;
 
+    #[Validate('nullable|string')]
+    public $status = 'belum diverifikasi';
+
     public function store()
     {
         $this->validate();
@@ -46,6 +49,7 @@ class RawatInapForm extends Form
             'alasan' => $this->alasan,
             'tanggal_masuk' => $this->tanggalMasuk,
             'tanggal_keluar' => $this->tanggalKeluar,
+            'status' => $this->status,
             'user_id' => Auth::id()
         ]);
 
