@@ -20,7 +20,6 @@ class RawatInap extends Component
         session()->flash('success', 'Data berhasil dihapus.');
 
         // Perbarui koleksi 
-
         $this->redirectRoute('rawat.index');
     }
 
