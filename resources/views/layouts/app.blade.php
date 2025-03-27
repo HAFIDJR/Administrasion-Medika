@@ -205,7 +205,8 @@
                         @endif
                         @if ($role === 'admin')
                             <a class="collapse-item" href="/pasien">Periksa Pasien</a>
-                            <a class="collapse-item" href="/rawat">Data Pengajuan Rawat</a>
+                            <a class="collapse-item" href="{{ route('rawat.index') }}" wire:navigate>Data Pengajuan
+                                Rawat</a>
                             <a class="collapse-item" href="/pemasok">Data Pemasok</a>
                         @endif
                         @if ($role === 'dokter')
