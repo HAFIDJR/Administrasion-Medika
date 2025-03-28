@@ -5,6 +5,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\RawatInapController;
+use App\Livewire\Pasien\CreatePasien;
+use App\Livewire\Pasien\PasienIndex;
 use App\Livewire\RawatInap\CreateRawatInap;
 use App\Livewire\RawatInap\EditRawatInap;
 use App\Livewire\RawatInap\RawatInap;
@@ -40,10 +42,14 @@ Route::post('/email/verification-notification', [EmailController::class, 'resend
     ->middleware(['auth', 'throttle:6,1'])
     ->name('verification.send');
 
+// Admin Page
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/pasien', PasienIndex::class)->name('pasien.index');
+    Route::get('/pasien/create', CreatePasien::class)->name('pasien.create');
+});
 
 // Rawat Inap Controller 
 Route::middleware(['auth'])->group(function () {
-    // Route::resource('rawat', RawatInapController::class);
     Route::get('/rawat', RawatInap::class)->name('rawat.index');
     Route::get('/rawat/create', CreateRawatInap::class)->name('rawat.create');
     Route::get('/rawat/show/{rawatInap}', ShowRawatInap::class)->name('rawat.show');

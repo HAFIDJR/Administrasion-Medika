@@ -127,7 +127,8 @@
                         </div>
                         <!-- Tombol dengan link -->
                         <div class="card-footer">
-                            <a href="/akun" class="btn btn-primary w-100 text-decoration-none">Akses Menu</a>
+                            <a href="{{ route('pasien.index') }}" class="btn btn-primary w-100 text-decoration-none">Akses
+                                Menu</a>
                         </div>
                     </div>
                 </div>

@@ -8,7 +8,6 @@ use Livewire\Component;
 
 class RawatInap extends Component
 {
-
     public $rawatInap;
 
     public function deleteRawat($id)
