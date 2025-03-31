@@ -62,10 +62,7 @@
                                     role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
-                                            <form method="post"
-                                                action="{{ route('pasien.destroy', $pasienItem->id) }}">
-                                                @csrf
-                                                @method('delete')
+                                            <form wire:submit='deletePasien({{ $pasienItem->id }})'>
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="confirmDeleteModalLabel">Konfirmasi
                                                         Hapus
@@ -76,7 +73,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>Apakah Anda yakin ingin menghapus ini?</p>
+                                                    <p>Apakah Anda yakin ingin menghapus Data Pasien ?</p>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
