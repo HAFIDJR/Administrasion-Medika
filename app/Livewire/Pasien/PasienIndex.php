@@ -8,6 +8,17 @@ use Livewire\Component;
 class PasienIndex extends Component
 {
     public $pasien;
+
+    public function deletePasien($id)
+    {
+        $rawatInap = Pasien::findOrFail($id);
+        $rawatInap->delete();
+
+        session()->flash('success', 'Data berhasil dihapus.');
+
+        // Perbarui koleksi 
+        $this->redirectRoute('pasien.index');
+    }
     public function mount()
     {
         $this->pasien = Pasien::all();

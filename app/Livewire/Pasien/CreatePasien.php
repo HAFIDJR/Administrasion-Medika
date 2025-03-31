@@ -9,25 +9,23 @@ use Livewire\Component;
 class CreatePasien extends Component
 {
     public PasienForm $form;
-    public $no_antrian;
     public function mount()
     {
         $tanggal = now();
-        $this->no_antrian = $tanggal->format("m-Y") . "/" . "ANTRIAN" . "-";
+        $this->form->no_antrian = $tanggal->format("m-Y") . "/" . "ANTRIAN" . "-";
 
-        $no_terakhir = Pasien::where("no_antrian", 'like', $this->no_antrian)
+        $no_terakhir = Pasien::where("no_antrian", 'like', $this->form->no_antrian . '%')
             ->orderBy('no_antrian', 'desc')
             ->first();
-
         if ($no_terakhir) {
             // Memecah nomor antrian terakhir untuk mengambil angka di akhir
             $last_no = explode('-', $no_terakhir->no_antrian);
             $last_num = intval(end($last_no));
 
             // Menambahkan 1 pada nomor terakhir dan mengisi dengan angka nol di depan jika perlu
-            $this->no_antrian .= str_pad($last_num + 1, 2, '0', STR_PAD_LEFT);
+            $this->form->no_antrian .= str_pad($last_num + 1, 2, '0', STR_PAD_LEFT);
         } else {
-            $this->no_antrian .= '01';
+            $this->form->no_antrian .= '01';
         }
 
     }
@@ -35,6 +33,8 @@ class CreatePasien extends Component
     public function save()
     {
         $this->form->store();
+        return redirect()->route('pasien.index')
+            ->with('success', 'Pasien berhasil ditambahkan');
     }
 
 
