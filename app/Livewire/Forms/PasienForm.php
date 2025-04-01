@@ -12,7 +12,7 @@ class PasienForm extends Form
 
     #[Validate('required')]
     public $no_antrian = '';
-    //
+
     #[Validate("required|string|min:3")]
     public $nm_pasien = "";
 

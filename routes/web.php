@@ -8,6 +8,9 @@ use App\Http\Controllers\RawatInapController;
 use App\Livewire\Pasien\CreatePasien;
 use App\Livewire\Pasien\EditPasien;
 use App\Livewire\Pasien\PasienIndex;
+use App\Livewire\Pemasok\CreatePemasok;
+use App\Livewire\Pemasok\EditPemasok;
+use App\Livewire\Pemasok\PemasokIndex;
 use App\Livewire\RawatInap\CreateRawatInap;
 use App\Livewire\RawatInap\EditRawatInap;
 use App\Livewire\RawatInap\RawatInap;
@@ -45,10 +48,19 @@ Route::post('/email/verification-notification', [EmailController::class, 'resend
 
 // Admin Page
 Route::middleware(['auth', 'admin'])->group(function () {
+    // Pasien
     Route::get('/pasien', PasienIndex::class)->name('pasien.index');
     Route::get('/pasien/create', CreatePasien::class)->name('pasien.create');
     Route::get('/pasien/edit/{pasien}', EditPasien::class)->name('pasien.edit');
     Route::post('/pasien/delete/{pasien}', EditRawatInap::class)->name('pasien.destroy');
+
+    // Pemasok
+    Route::get('/pemasok', PemasokIndex::class)->name('pemasok.index');
+    Route::get('/pemasok/create', CreatePemasok::class)->name('pemasok.create');
+    Route::get('/pemasok/edit/{pemasok}', EditPemasok::class)->name('pemasok.edit');
+    Route::get('/pemasok/delete', CreatePemasok::class)->name('pemasok.delete');
+
+
 });
 
 // Rawat Inap Controller 

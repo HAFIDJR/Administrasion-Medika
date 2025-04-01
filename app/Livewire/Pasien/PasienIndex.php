@@ -11,12 +11,11 @@ class PasienIndex extends Component
 
     public function deletePasien($id)
     {
-        $rawatInap = Pasien::findOrFail($id);
-        $rawatInap->delete();
+        $pasien = Pasien::findOrFail($id);
+        $pasien->delete();
 
         session()->flash('success', 'Data berhasil dihapus.');
 
-        // Perbarui koleksi 
         $this->redirectRoute('pasien.index');
     }
     public function mount()
