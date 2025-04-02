@@ -25,7 +25,7 @@
                                         Selamat Datang,
                                     </div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                        {{ Auth::user()->username }}
+                                        {{ Auth::user()->name }}
                                         <small class="text-muted">({{ Auth::user()->role }})</small>
                                     </div>
                                 </div>

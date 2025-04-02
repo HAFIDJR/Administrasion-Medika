@@ -13,6 +13,4 @@ class LoginForm extends Form
     public $password = '';
 
     public $remember_me = false;
-
-
 }
