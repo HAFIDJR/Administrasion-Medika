@@ -15,6 +15,8 @@ use App\Livewire\RawatInap\CreateRawatInap;
 use App\Livewire\RawatInap\EditRawatInap;
 use App\Livewire\RawatInap\RawatInap;
 use App\Livewire\RawatInap\ShowRawatInap;
+use App\Livewire\User\EditUser;
+use App\Livewire\User\UserIndex;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -48,6 +50,10 @@ Route::post('/email/verification-notification', [EmailController::class, 'resend
 
 // Admin Page
 Route::middleware(['auth', 'admin'])->group(function () {
+    //User
+    Route::get('/user', UserIndex::class)->name('user.index');
+    Route::get('/user/{user}', EditUser::class)->name('user.edit');
+
     // Pasien
     Route::get('/pasien', PasienIndex::class)->name('pasien.index');
     Route::get('/pasien/create', CreatePasien::class)->name('pasien.create');
