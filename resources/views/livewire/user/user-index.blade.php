@@ -51,13 +51,14 @@
                             </tr>
 
                             <!-- Modal Konfirmasi Hapus -->
-                            <div class="modal fade" id="confirmDeleteModal{{ $userItem->id }}" tabindex="-1" role="dialog"
-                                aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="confirmDeleteModal{{ $userItem->id }}" tabindex="-1"
+                                role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
-                                        <form>
+                                        <form wire:submit='deleteUser({{ $userItem->id }})'>
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="confirmDeleteModalLabel">Konfirmasi Hapus</h5>
+                                                <h5 class="modal-title" id="confirmDeleteModalLabel">Konfirmasi Hapus
+                                                </h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
