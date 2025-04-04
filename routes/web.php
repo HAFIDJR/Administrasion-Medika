@@ -5,6 +5,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\RawatInapController;
+use App\Livewire\Obat\CreateObat;
+use App\Livewire\Obat\EditObat;
+use App\Livewire\Obat\ObatIndex;
 use App\Livewire\Pasien\CreatePasien;
 use App\Livewire\Pasien\EditPasien;
 use App\Livewire\Pasien\PasienIndex;
@@ -66,6 +69,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/pemasok/edit/{pemasok}', EditPemasok::class)->name('pemasok.edit');
     Route::get('/pemasok/delete', CreatePemasok::class)->name('pemasok.delete');
 
+    // Obat
+    Route::get('/obat', ObatIndex::class)->name('obat.index');
+    Route::get('/obat/create', CreateObat::class)->name('obat.create');
+    Route::get('/obat/edit/{obat}', EditObat::class)->name('obat.edit');
 
 });
 
