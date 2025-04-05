@@ -3,10 +3,10 @@
         <!-- Project Card Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <a href="{{ route('obat.create')}}" class="btn btn-primary float-right">
+                <a href="{{ route('barang.create') }}" class="btn btn-primary float-right">
                     <i class="fas fa-plus"></i>
                 </a>
-                <h4 class="m-15 font-weight-bold">DAFTAR OBAT</h4>
+                <h4 class="m-15 font-weight-bold">DAFTAR BARANG</h4>
             </div>
             <div class="card-body">
                 <!-- Menampilkan pesan kesuksesan -->
@@ -24,37 +24,38 @@
                     <thead>
                         <tr align="center">
                             <th style="width: 5%">#</th>
-                            <th style="width: 30%">Nama Obat</th>
+                            <th style="width: 30%">Nama Barang</th>
                             <th style="width: 20%">Stok</th>
                             <th style="width: 20%">Harga Satuan</th>
                             <th style="width: 25%">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($obat as $index => $obatItem)
+                        @foreach ($barang as $index => $barangItem)
                             <tr align="center">
                                 <td>{{ $index + 1 }}</td>
-                                <td>{{ $obatItem->nm_obat }}</td>
-                                <td>{{ $obatItem->satuan }}</td>
-                                <td>Rp.{{ number_format($obatItem->harga, '2', ',', '.') }}</td>
+                                <td>{{ $barangItem->nm_brg }}</td>
+                                <td>{{ $barangItem->satuan }}</td>
+                                <td>Rp. {{ number_format($barangItem->harga, '2', ',', '.') }}</td>
                                 <td>
-                                    <a href="{{ route('obat.edit', $obatItem->id) }}" class="btn btn-sm btn-warning">
+                                    <a href="{{ route('barang.edit', $barangItem->id) }}"
+                                        class="btn btn-sm btn-warning">
                                         <i class="fas fa-edit"></i> Edit
                                     </a>
                                     <!-- Tombol Hapus -->
                                     <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
-                                        data-target="#confirmDeleteModal{{ $obatItem->id }}">
+                                        data-target="#confirmDeleteModal{{ $barangItem->id }}">
                                         <i class="fas fa-trash"></i> Hapus
                                     </button>
                                 </td>
                             </tr>
 
                             <!-- Modal Konfirmasi Hapus -->
-                            <div class="modal fade" id="confirmDeleteModal{{ $obatItem->id }}" tabindex="-1"
+                            <div class="modal fade" id="confirmDeleteModal{{ $barangItem->id }}" tabindex="-1"
                                 role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
-                                        <form wire:submit='deleteObat({{ $obatItem->id }})'>
+                                        <form>
 
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="confirmDeleteModalLabel">Konfirmasi Hapus
