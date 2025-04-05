@@ -5,6 +5,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\RawatInapController;
+use App\Livewire\Barang\BarangIndex;
+use App\Livewire\Barang\CreateBarang;
+use App\Livewire\Barang\EditBarang;
 use App\Livewire\Obat\CreateObat;
 use App\Livewire\Obat\EditObat;
 use App\Livewire\Obat\ObatIndex;
@@ -74,6 +77,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/obat/create', CreateObat::class)->name('obat.create');
     Route::get('/obat/edit/{obat}', EditObat::class)->name('obat.edit');
 
+    // Barang
+    Route::get('/barang', BarangIndex::class)->name('barang.index');
+    Route::get('/barang/create', CreateBarang::class)->name('barang.create');
+    Route::get('/barang/edit/{barang}', EditBarang::class)->name('barang.edit');
 });
 
 // Rawat Inap Controller 
