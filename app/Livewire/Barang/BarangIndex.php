@@ -12,6 +12,17 @@ class BarangIndex extends Component
     {
         $this->barang = Barang::all();
     }
+
+    public function deleteBarang($id)
+    {
+        $barang = Barang::findOrFail($id);
+        $barang->delete();
+
+        session()->flash('success', 'Data berhasil dihapus.');
+
+        $this->redirectRoute('barang.index');
+    }
+
     public function render()
     {
         return view('livewire.barang.barang-index');

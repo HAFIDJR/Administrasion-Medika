@@ -55,8 +55,7 @@
                                 role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
-                                        <form>
-
+                                        <form wire:submit='deleteBarang({{ $barangItem->id }})'>
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="confirmDeleteModalLabel">Konfirmasi Hapus
                                                 </h5>
