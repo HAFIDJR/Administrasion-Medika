@@ -21,6 +21,8 @@ use App\Livewire\RawatInap\CreateRawatInap;
 use App\Livewire\RawatInap\EditRawatInap;
 use App\Livewire\RawatInap\RawatInap;
 use App\Livewire\RawatInap\ShowRawatInap;
+use App\Livewire\TransaksiMasuk\CreateTransaksiMasuk;
+use App\Livewire\TransaksiMasuk\TransaksiMasukIndex;
 use App\Livewire\User\EditUser;
 use App\Livewire\User\UserIndex;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -81,6 +83,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/barang', BarangIndex::class)->name('barang.index');
     Route::get('/barang/create', CreateBarang::class)->name('barang.create');
     Route::get('/barang/edit/{barang}', EditBarang::class)->name('barang.edit');
+
+    // Transaksi Masuk 
+    Route::get('/transaksi_masuk', TransaksiMasukIndex::class)->name('transaksi_masuk.index');
+    Route::get('/transaksi_masuk/create', CreateTransaksiMasuk::class)->name('transaksi_masuk.create');
 });
 
 // Rawat Inap Controller 
