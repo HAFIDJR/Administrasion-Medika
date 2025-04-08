@@ -102,6 +102,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'dokter'])->group(function () {
     Route::get('/periksa-pasien', DokterIndex::class)->name('dokter.index');
     Route::get('/periksa-pasien/edit/{pasien}', EditPasien::class)->name('dokter.edit');
+    
 });
 Route::get('/', function () {
     return view('welcome');
