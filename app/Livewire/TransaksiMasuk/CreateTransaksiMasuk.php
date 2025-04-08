@@ -19,6 +19,13 @@ class CreateTransaksiMasuk extends Component
         return 'TRX-' . $next_no;
     }
 
+    public function save()
+    {
+        $this->form->store();
+        return redirect()->route('transaksi_masuk.index')
+            ->with('success', 'Transksi Masuk berhasil ditambahkan');
+    }
+
     public function mount()
     {
         $this->form->no_trans = $this->generateNoTransaksi();

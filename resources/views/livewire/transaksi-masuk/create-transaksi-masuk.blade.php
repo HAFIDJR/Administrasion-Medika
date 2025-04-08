@@ -11,16 +11,6 @@
                     </div>
 
                     <div class="card-body">
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
                         <form>
                             <div class="form-group">
                                 <label for="no_trans">No Transaksi:</label>
@@ -28,12 +18,18 @@
                                     value="{{ old('no_trans_generated') }}">
                                 <input type="text" name="no_trans" id="no_trans" class="form-control"
                                     wire:model='form.no_trans'>
+                                @error('form.no_trans')
+                                    <span class="error text-danger" style="font-size: 100%">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="tgl">Tanggal:</label>
                                 <input wire:model='form.tgl' type="date" name="tgl" id="tgl"
                                     class="form-control" value="{{ old('tgl') }}">
+                                @error('form.tgl')
+                                    <span class="error text-danger" style="font-size: 100%">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="row mb-3">
@@ -54,39 +50,65 @@
                                             </ul>
                                         </div>
                                     @endif
+                                    @error('form.nm_pasien')
+                                        <span class="error text-danger" style="font-size: 100%">{{ $message }}</span>
+                                    @enderror
                                 </div>
+
                             </div>
 
-
                             <div id="obat-container">
-                                <!-- Header tabel akan dimasukkan di sini -->
+                                <div class="row mb-3">
+                                    <div class="col-md-4 fw-bold">Nama Obat</div>
+                                    <div class="col-md-4 fw-bold">Jumlah</div>
+                                    <div class="col-md-2 fw-bold">Harga Satuan</div>
+                                    <div class="col-md-2 fw-bold">Total</div>
+                                </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="keterangan">Keterangan:</label>
-                                <input type="text" name="keterangan" id="keterangan" class="form-control"
-                                    value="{{ old('keterangan') }}">
+                                <input wire:model='form.keterangan' type="text" name="keterangan" id="keterangan"
+                                    class="form-control" value="{{ old('keterangan') }}">
+                                @error('form.keterangan')
+                                    <span class="error text-danger" style="font-size: 100%">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="keterangan_dosis">Keterangan Dosis:</label>
-                                <input type="text" name="keterangan_dosis" id="keterangan_dosis" class="form-control"
-                                    value="{{ old('keterangan_dosis') }}">
+                                <input wire:model='form.keterangan_dosis' type="text" name="keterangan_dosis"
+                                    id="keterangan_dosis" class="form-control" value="{{ old('keterangan_dosis') }}">
+                                @error('form.keterangan_dosis')
+                                    <span class="error text-danger" style="font-size: 100%">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="harga_periksa">Harga Periksa:</label>
-                                <input type="number" id="harga_periksa" name="harga_periksa" class="form-control"
+                                <input wire:model='form.harga_periksa' type="number" id="harga_periksa"
+                                    name="harga_periksa" class="form-control"
                                     placeholder="Masukkan harga periksa pasien" min="0" step="0.01">
+                                @error('form.harga_periksa')
+                                    <span class="error text-danger" style="font-size: 100%">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="total">Subtotal:</label>
                                 <input type="number" name="total" id="total" class="form-control"
-                                    value="{{ old('total') }}" readonly>
+                                    value="{{ old(key: 'total') }}" readonly>
+                                @error('form.total')
+                                    <span class="error text-danger" style="font-size: 100%">{{ $message }}</span>
+                                @enderror
                             </div>
+                            {{-- 
+                            <button x-on:click="$wire.showModal = true" type="button"
+                                class="btn btn-primary">Simpan</button> --}}
 
-                            <button type="button" id="showConfirmModal" class="btn btn-primary">Simpan</button>
-
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                                Simpan
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -94,22 +116,24 @@
         </div>
     </div>
 
-    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="confirmModalLabel">Konfirmasi</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     Apakah data sudah benar diisi?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-primary" id="confirmSubmit">Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button wire:click='save' type="button" class="btn btn-primary" id="confirmSubmit"
+                        wire:click="save" wire:loading.attr ="disabled" data-bs-dismiss="modal"> <span
+                            wire:loading.remove>Simpan</span>
+                        <span wire:loading>Menyimpan...</span>
+                    </button>
                 </div>
             </div>
         </div>
