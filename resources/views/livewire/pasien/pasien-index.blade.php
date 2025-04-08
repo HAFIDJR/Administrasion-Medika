@@ -92,9 +92,6 @@
         </div>
     @endif
 
-
-
-
     @if ($role === 'dokter')
         <div class="col-lg-10 mb-10 mx-auto">
             <!-- Project Card Example -->
@@ -112,11 +109,6 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    @if (session('error'))
-                        <div class="alert alert-error" role="alert">
-                            {{ session('error') }}
-                    @endif
-
                     <table id="dataTable" class="table table-bordered" cellspacing="1"><br />
                         <thead>
                             <tr align="center">
@@ -137,7 +129,7 @@
                                     <td>{{ $pasienItem->alamat }}</td>
                                     <td>{{ $pasienItem->tensi }}</td>
                                     <td>
-                                        <a href="{{ route('pasien.editPeriksa', $pasienItem->id) }}"
+                                        <a href="{{ route('dokter.edit', $pasienItem->id) }}"
                                             class="btn btn-sm btn-warning">
                                             <i class="fas fa-edit"></i> Pilih
                                         </a>
