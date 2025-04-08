@@ -91,7 +91,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 // Rawat Inap Controller 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'pasien'])->group(function () {
     Route::get('/rawat', RawatInap::class)->name('rawat.index');
     Route::get('/rawat/create', CreateRawatInap::class)->name('rawat.create');
     Route::get('/rawat/show/{rawatInap}', ShowRawatInap::class)->name('rawat.show');
@@ -102,7 +102,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'dokter'])->group(function () {
     Route::get('/periksa-pasien', DokterIndex::class)->name('dokter.index');
     Route::get('/periksa-pasien/edit/{pasien}', EditPasien::class)->name('dokter.edit');
-    
+
 });
 Route::get('/', function () {
     return view('welcome');

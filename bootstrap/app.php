@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\DokterMiddleware;
+use App\Http\Middleware\PasienMiddleware;
 use App\Http\Middleware\RedirectIfVerified;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -18,7 +19,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'redirectIfVerified' => RedirectIfVerified::class,
             'admin' => AdminMiddleware::class,
-            'dokter' => DokterMiddleware::class
+            'dokter' => DokterMiddleware::class,
+            'pasien' => PasienMiddleware::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
