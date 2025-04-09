@@ -9,6 +9,7 @@ use App\Livewire\Barang\BarangIndex;
 use App\Livewire\Barang\CreateBarang;
 use App\Livewire\Barang\EditBarang;
 use App\Livewire\Dokter\DokterIndex;
+use App\Livewire\Dokter\EditPeriksaPasien;
 use App\Livewire\Obat\CreateObat;
 use App\Livewire\Obat\EditObat;
 use App\Livewire\Obat\ObatIndex;
@@ -101,7 +102,7 @@ Route::middleware(['auth', 'pasien'])->group(function () {
 // Dokter Controller
 Route::middleware(['auth', 'dokter'])->group(function () {
     Route::get('/periksa-pasien', DokterIndex::class)->name('dokter.index');
-    Route::get('/periksa-pasien/edit/{pasien}', EditPasien::class)->name('dokter.edit');
+    Route::get('/periksa-pasien/edit/{pasien}', EditPeriksaPasien::class)->name('dokter.edit');
 
 });
 Route::get('/', function () {
