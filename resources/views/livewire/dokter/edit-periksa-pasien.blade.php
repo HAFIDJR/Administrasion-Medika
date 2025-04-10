@@ -75,7 +75,7 @@
                             </div>
                             <div class="col-md-2">
                                 <button type="button" class="btn btn-primary" id="addObat"
-                                    wire:click='updatePemeriksa'>
+                                    wire:click='updateObatPasien'>
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </div>
@@ -92,7 +92,7 @@
 
                     <div class="form-group">
                         <label for="total">Subtotal:</label>
-                        <input type="number" name="total" id="total" class="form-control"
+                        <input disabled type="number" name="total" id="total" class="form-control"
                             wire:model='form.total'>
                     </div>
 

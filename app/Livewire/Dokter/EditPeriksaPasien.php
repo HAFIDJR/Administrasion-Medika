@@ -6,6 +6,7 @@ use App\Livewire\Forms\PeriksaPasien;
 use App\Models\DetailPeriksa;
 use App\Models\Obat;
 use App\Models\Pasien;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class EditPeriksaPasien extends Component
@@ -16,15 +17,21 @@ class EditPeriksaPasien extends Component
     public $obat_id;
     public $jumlah;
     public $detailPeriksa;
+    public $total_harga = 0;
 
     public function mount(Pasien $pasien)
     {
         $this->detailPeriksa = $pasien->detailPeriksa;
+        foreach ($this->detailPeriksa as $key => $value) {
+            $this->total_harga += $value->obat->harga * $value->jumlah;
+
+        }
         $this->obat = Obat::all();
         $this->form->setPasien($pasien);
+        $this->form->total = $this->total_harga;
     }
 
-    public function updatePemeriksa()
+    public function updateObatPasien()
     {
 
         $obat = Obat::find($this->obat_id);
@@ -33,10 +40,37 @@ class EditPeriksaPasien extends Component
             $this->addError('obat_id', 'Stok tidak mencukupi untuk obat: ' . $namaObat);
             return;
         }
-        DetailPeriksa::updateOrCreate(['pasien_id' => $this->pasien->id]);
-        $this->form->updatePemeriksa($this->obat);
+
+        // Dapatkan Data Detail Periksa
+        DetailPeriksa::updateOrCreate(
+            ['pasien_id' => $this->pasien->id, 'obat_id' => $this->obat_id], // kriteria pencarian
+            [
+                'jumlah' => $this->jumlah + (
+                    DetailPeriksa::where('pasien_id', $this->pasien->id)
+                        ->where('obat_id', $this->obat_id)
+                        ->value('jumlah') ?? 0
+                )
+            ] // data untuk diupdate atau dibuat
+        );
+
+        $obat->satuan -= $this->jumlah;
+        $obat->save();
+        $this->dispatch('update-obat-pasien');
+        session()->flash('success', 'Data Pemeriksaan Berhasil Diperbarui!');
     }
 
+    #[On('update-obat-pasien')]
+    public function refreshData()
+    {
+        $this->detailPeriksa = $this->pasien->detailPeriksa;
+        $this->total_harga = 0;
+        foreach ($this->detailPeriksa as $key => $value) {
+            $this->total_harga += $value->obat->harga * $value->jumlah;
+
+        }
+        $this->form->total = $this->total_harga;
+
+    }
     public function render()
     {
         return view('livewire.dokter.edit-periksa-pasien');
