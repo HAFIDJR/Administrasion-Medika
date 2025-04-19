@@ -75,18 +75,23 @@
                             </div>
                             <div class="col-md-2">
                                 <button type="button" class="btn btn-primary" id="addObat"
-                                    wire:click='updateObatPasien'>
+                                    wire:click='updateObatPasien' wire:loading.remove>
                                     <i class="fas fa-plus"></i>
                                 </button>
+                                <div wire:loading wire:target="updateObatPasien">
+                                    <button class="btn btn-primary">
+                                        <div class="spinner-border spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
                         <div class="row mb-3 obat-row">
-
                             @error('obat_id')
                                 <div class="text-danger mx-auto " style="width: 45%">{{ $message }}</div>
                             @enderror
-
                         </div>
                     </div>
 
@@ -117,6 +122,7 @@
                         <th>Obat</th>
                         <th>Jumlah</th>
                         <th>Harga Satuan</th>
+                        <th>Jumlah</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -126,6 +132,18 @@
                             <td>{{ $detail->obat->nm_obat ?? 'Tidak Diketahui' }}</td>
                             <td>{{ $detail->jumlah }}</td>
                             <td>{{ $detail->obat->harga ?? 'Tidak Ada' }}</td>
+                            <td>
+                                <div class="input-group w-auto justify-content-center align-items-center">
+                                    <input type="button" value="-"
+                                        class="button-minus border rounded-circle  icon-shape icon-sm mx-1 "
+                                        data-field="quantity">
+                                    <input type="number" step="1" max="10" value="1"
+                                        name="quantity" class="quantity-field border-0 text-center w-25">
+                                    <input type="button" value="+"
+                                        class="button-plus border rounded-circle icon-shape icon-sm lh-0"
+                                        data-field="quantity">
+                                </div>
+                            </td>
                             <td>
                                 <form style="display:inline;">
                                     <button type="submit" class="btn btn-danger btn-sm">
