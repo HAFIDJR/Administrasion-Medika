@@ -14,6 +14,7 @@ class EditPeriksaPasien extends Component
     public Pasien $pasien;
     public PeriksaPasien $form;
     public $obat;
+    public $stockObat = [];
     public $obat_id;
     public $jumlah;
     public $detailPeriksa;
@@ -31,6 +32,32 @@ class EditPeriksaPasien extends Component
         $this->form->total = $this->total_harga;
     }
 
+    public function updatedObatId()
+    {
+        $this->stockObat = Obat::find($this->obat_id)->satuan;
+    }
+
+    public function changeStorageObat($idDetailPeriksa, $operator)
+    {
+        $detailPeriksa = DetailPeriksa::find($idDetailPeriksa);
+        $obat = Obat::find($detailPeriksa->obat_id);
+        $quantityObat = $detailPeriksa->jumlah;
+
+        if ($operator == '+') {
+            $quantityObat += 1;
+            $detailPeriksa->jumlah = $quantityObat;
+            $obat->satuan -= 1;
+            $obat->save();
+            $detailPeriksa->save();
+        } else {
+            $quantityObat -= 1;
+            $detailPeriksa->jumlah = $quantityObat;
+            $obat->satuan += 1;
+            $obat->save();
+            $detailPeriksa->save();
+        }
+        $this->dispatch('update-obat-pasien');
+    }
     public function updateObatPasien()
     {
 

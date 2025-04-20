@@ -55,12 +55,12 @@
                             wire:model='form.keterangan_dosis'>
                     </div>
 
-                    <div id="obat-container">
-                        <div class="row mb-3 obat-row">
-                            <label for="obat_1" class="col-md-4 col-form-label text-md-end">Obat 1</label>
+                    <div class="form-group">
+                        <div class="row mb-3 align-items-end">
                             <div class="col-md-4">
+                                <label for="obat_1" class="form-label">Obat</label>
                                 <select id="obat_1" class="form-control obat-select" name="obat_ids[]" data-harga="0"
-                                    wire:model="obat_id">
+                                    wire:model.change="obat_id">
                                     <option value="">Pilih Obat</option>
                                     @foreach ($obat as $o)
                                         <option value="{{ $o->id }}" data-harga="{{ $o->harga }}">
@@ -69,31 +69,36 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-2">
-                                <input type="number" name="jumlah[]" class="form-control jumlah-obat"
-                                    placeholder="Jumlah" min="1" value="1" wire:model='jumlah'>
+                            <div class="col-md-4">
+                                <label for="stockObat" class="form-label">Stock</label>
+                                <input type="number" name="stockObat" class="form-control stock-obat"
+                                    wire:model='stockObat' placeholder="Stock" disabled>
                             </div>
-                            <div class="col-md-2">
-                                <button type="button" class="btn btn-primary" id="addObat"
-                                    wire:click='updateObatPasien' wire:loading.remove>
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                                <div wire:loading wire:target="updateObatPasien">
-                                    <button class="btn btn-primary">
-                                        <div class="spinner-border spinner-border-sm" role="status">
-                                            <span class="visually-hidden">Loading...</span>
-                                        </div>
+                            <div class="col-md-4">
+                                <div>
+                                    <button type="button" class="btn btn-primary me-2" id="addObat"
+                                        wire:click='updateObatPasien' wire:loading.remove
+                                        wire:target="updateObatPasien">
+                                        <i class="fas fa-plus"></i>
                                     </button>
+                                    <div wire:loading wire:target="updateObatPasien">
+                                        <button class="btn btn-primary">
+                                            <div class="spinner-border spinner-border-sm" role="status">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row mb-3 obat-row">
                             @error('obat_id')
-                                <div class="text-danger mx-auto " style="width: 45%">{{ $message }}</div>
+                                <div class="text-danger mx-auto" style="width: 45%">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
+
 
                     <div class="form-group">
                         <label for="total">Subtotal:</label>
@@ -120,7 +125,6 @@
                 <thead>
                     <tr>
                         <th>Obat</th>
-                        <th>Jumlah</th>
                         <th>Harga Satuan</th>
                         <th>Jumlah</th>
                         <th>Aksi</th>
@@ -130,16 +134,19 @@
                     @foreach ($detailPeriksa as $detail)
                         <tr>
                             <td>{{ $detail->obat->nm_obat ?? 'Tidak Diketahui' }}</td>
-                            <td>{{ $detail->jumlah }}</td>
                             <td>{{ $detail->obat->harga ?? 'Tidak Ada' }}</td>
                             <td>
                                 <div class="input-group w-auto justify-content-center align-items-center">
                                     <input type="button" value="-"
+                                        wire:click="changeStorageObat({{ $detail->id }}, '-')"
                                         class="button-minus border rounded-circle  icon-shape icon-sm mx-1 "
                                         data-field="quantity">
-                                    <input type="number" step="1" max="10" value="1"
-                                        name="quantity" class="quantity-field border-0 text-center w-25">
+                                    <input type="number" step="1" max="10"
+                                        value="{{ $detail->jumlah }}" name="quantity"
+                                        class="quantity-field border-0 text-center w-25">
+
                                     <input type="button" value="+"
+                                        wire:click="changeStorageObat({{ $detail->id }},'+' )"
                                         class="button-plus border rounded-circle icon-shape icon-sm lh-0"
                                         data-field="quantity">
                                 </div>
