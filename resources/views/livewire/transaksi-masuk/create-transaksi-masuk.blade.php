@@ -17,7 +17,7 @@
                                 <input type="hidden" name="no_trans_generated" id="no_trans_generated"
                                     value="{{ old('no_trans_generated') }}">
                                 <input type="text" name="no_trans" id="no_trans" class="form-control"
-                                    wire:model='form.no_trans'>
+                                    wire:model='form.no_trans' disabled>
                                 @error('form.no_trans')
                                     <span class="error text-danger" style="font-size: 100%">{{ $message }}</span>
                                 @enderror
