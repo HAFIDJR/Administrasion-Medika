@@ -37,18 +37,16 @@ class PeriksaPasien extends Form
     #[Validate("nullable")]
     public $keterangan_dosis;
 
+    // #[Validate("required|integer|min:0")]
+    // public $jumlah = '';
+
     #[Validate("required")]
-    public $obat_id = '';
-
-    #[Validate("required|integer|min:0")]
-    public $jumlah = '';
-
-    #[Validate("nullable")]
     public $total;
 
     public function setPasien(Pasien $pasien)
     {
         $this->pasien = $pasien;
+        $this->no_antrian = $pasien->no_antrian;
         $this->nm_pasien = $pasien->nm_pasien;
         $this->umur = $pasien->umur;
         $this->alamat = $pasien->alamat;
@@ -59,9 +57,9 @@ class PeriksaPasien extends Form
         $this->total = $pasien->total;
     }
 
-    public function updatePemeriksa($obat_id): void
+    public function update()
     {
         $this->validate();
-        $this->obat_id = $obat_id;
+        $this->pasien->update($this->all());
     }
 }

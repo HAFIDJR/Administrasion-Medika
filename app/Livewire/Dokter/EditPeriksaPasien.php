@@ -58,9 +58,14 @@ class EditPeriksaPasien extends Component
         }
         $this->dispatch('update-obat-pasien');
     }
+
+    public function updatePemeriksaan()
+    {
+        $this->form->update();
+        session()->flash('success', 'Data Pasien Berhasil Diperbarui!');
+    }
     public function updateObatPasien()
     {
-
         $obat = Obat::find($this->obat_id);
         if (!$obat || $obat->satuan < $this->jumlah) {
             $namaObat = $obat ? $obat->nm_obat : 'Unknown';

@@ -18,8 +18,17 @@
                         {{ session('success') }}
                     </div>
                 @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
-                <form>
+                <form wire:submit='updatePemeriksaan'>
                     <div class="form-group">
                         <label for="nm_pasien">Nama Pasien:</label>
                         <input type="text" class="form-control" id="nm_pasien" name="nm_pasien"
