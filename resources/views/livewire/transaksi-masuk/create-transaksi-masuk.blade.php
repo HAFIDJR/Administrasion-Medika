@@ -64,6 +64,14 @@
                                     <div class="col-md-2 fw-bold">Harga Satuan</div>
                                     <div class="col-md-2 fw-bold">Total</div>
                                 </div>
+                                @foreach ($datailObatPasien as $item)
+                                    <div class="row mb-3">
+                                        <div class="col-md-4 fw-bold">{{ $item->obat->nm_obat }}</div>
+                                        <div class="col-md-4 fw-bold">{{ $item->jumlah }}</div>
+                                        <div class="col-md-2 fw-bold">{{ $item->obat->harga }}</div>
+                                        <div class="col-md-2 fw-bold">{{ $item->obat->harga * $item->jumlah }}</div>
+                                    </div>
+                                @endforeach
                             </div>
 
                             <div class="form-group">
