@@ -10,6 +10,7 @@ use Livewire\Component;
 class CreateTransaksiMasuk extends Component
 {
     public $pasien = [];
+    public $datailObatPasien = [];
     public TransaksiMasukForm $form;
     public function generateNoTransaksi()
     {
@@ -47,6 +48,7 @@ class CreateTransaksiMasuk extends Component
     public function selectPasien($id)
     {
         $pasien = Pasien::find($id);
+        $this->datailObatPasien = $pasien->detailPeriksa;
         $this->form->pasien_id = $pasien->id;
         $this->form->nm_pasien = $pasien->nm_pasien;
         $this->pasien = [];

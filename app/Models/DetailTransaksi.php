@@ -17,8 +17,6 @@ class DetailTransaksi extends Model
 
     ];
 
-
-
     public function transaksiMasuk()
     {
         return $this->belongsTo(TransaksiMasuk::class, 'transaksi_masuk_id');
